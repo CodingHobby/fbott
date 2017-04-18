@@ -1,7 +1,7 @@
 const express = require('express'),
 	app = express(),
 	port = process.env.PORT || 3000,
-	token = require('token'),
+	token = require('./token'),
 	server = app.listen(port, function () {
 		console.log('App running on port ' + port)
 	})
