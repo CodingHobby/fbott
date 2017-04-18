@@ -85,6 +85,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, "Message with attachment received");
 	}
 }
+
 function sendTextMessage(recipientId, messageText) {
 	var messageData = {
 		recipient: {

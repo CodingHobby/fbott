@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "A simple Messenger Bot",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "author": "Corrado Canepari",
   "license": "MIT",
   "dependencies": {
