@@ -4,6 +4,7 @@ const express = require('express'),
 	pwd = require('./tokens').pwd,
 	token = require('./tokens').token,
 	bodyParser = require('body-parser'),
+	request = require('request'),
 	server = app.listen(port, function () {
 		console.log('App running on port ' + port)
 	})
