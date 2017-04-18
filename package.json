@@ -1,0 +1,11 @@
+{
+  "name": "f-bot",
+  "version": "0.0.0",
+  "description": "A simple Messenger Bot",
+  "main": "server.js",
+  "author": "Corrado Canepari",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
