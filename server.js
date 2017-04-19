@@ -10,7 +10,7 @@ const express = require('express'),
 		console.log('App running on port ' + port)
 	})
 
-var weather = require("Openweather-Node")
+var weather = require("openweather-node")
 
 weather.setAPPID(api)
 weather.setCulture("it");
