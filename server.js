@@ -96,6 +96,7 @@ function sendTextMessage(id, messageText) {
 
 			if (!aData) text = 'No data'
 			else {
+				console.log(aData.getDegreeTemp())
 				text = `Temperature in ${city} is ${aData.getDegreeTemp()}`
 			}
 		})
