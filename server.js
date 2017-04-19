@@ -8,7 +8,7 @@ const express = require('express'),
 	server = app.listen(port, function () {
 		console.log('App running on port ' + port)
 	}),
-	API = 'api.openweathermap.org/data/2.5/weather?q=$$CITY$$'
+	weather = require('weather-js')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -86,8 +86,13 @@ function sendTextMessage(id, messageText) {
 		city.splice(0, 1)
 		city = city.join('')
 
-		let uri = API.replace('$$CITY$$', city)
+		weather.find({ search: city, degreeType: 'C' }, (err, result) => {
+			if (err) text = err
 
+			else {
+				let text = result.current.temperature
+			}
+		});
 		text = uri
 	} else {
 		text = messageText
@@ -98,7 +103,7 @@ function sendTextMessage(id, messageText) {
 			id
 		},
 		message: {
-			text
+			text: text || 'Something went wrong'
 		}
 	}
 
@@ -122,5 +127,5 @@ function callSendAPI(messageData) {
 		} else {
 			console.error("Unable to send message.\n", response, '\n', error);
 		}
-	});
+	})
 }
