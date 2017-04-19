@@ -3,12 +3,17 @@ const express = require('express'),
 	port = process.env.PORT || 3000,
 	pwd = require('./tokens').pwd,
 	token = require('./tokens').token,
+	api = require('./tokens').api,
 	bodyParser = require('body-parser'),
 	request = require('request'),
 	server = app.listen(port, function () {
 		console.log('App running on port ' + port)
-	}),
-	Weather = require('weather.js')
+	})
+
+var weather = require("Openweather-Node")
+
+weather.setAPPID(api)
+weather.setCulture("it");
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -86,8 +91,13 @@ function sendTextMessage(id, messageText) {
 		city.splice(0, 1)
 		city = city.join('')
 
-		Weather.getCurrent(city, function(current) {
-			text = `Temperature: ${current.temperature()}\nConditions: ${current.conditions()}`
+		weather.now(city, function (err, aData) {
+			if (err) text = `Error: ${err}`
+
+			if (!aData) text = 'No data'
+			else {
+				text = `Temperature in ${city} is ${aData.getDegreeTemp()}`
+			}
 		})
 	} else {
 		text = messageText
