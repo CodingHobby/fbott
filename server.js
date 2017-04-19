@@ -7,7 +7,8 @@ const express = require('express'),
 	request = require('request'),
 	server = app.listen(port, function () {
 		console.log('App running on port ' + port)
-	})
+	}),
+	API = 'api.openweathermap.org/data/2.5/weather?q=$$CITY_NAME$$'
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -71,16 +72,18 @@ function receivedMessage(event) {
 	var messageAttachments = message.attachments;
 
 	if (messageText) {
-
 		// If we receive a text message, check to see if it matches a keyword
 		// and send back the example. Otherwise, just echo the text we received.
 		switch (messageText.charAt(0)) {
 			case '!':
-				sendTextMessage(senderID, 'Message starts with "c"');
-				break;
+				const city = messageText.split('')
+				city.splice(0, 1)
+				city.join('')
+				sendApiData(senderID, city);
+				break
 
 			default:
-				sendTextMessage(senderID, messageText);
+				sendTextMessage(senderID, messageText)
 		}
 	} else if (messageAttachments) {
 		sendTextMessage(senderID, "Message with attachment received");
@@ -98,6 +101,19 @@ function sendTextMessage(recipientId, messageText) {
 	};
 
 	callSendAPI(messageData);
+}
+
+function sendApiData(recipientId, city) {
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		message: {
+			text: city
+		}
+	}
+
+	callSendAPI(messageData)
 }
 
 function callSendAPI(messageData) {
