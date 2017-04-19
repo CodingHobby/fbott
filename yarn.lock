@@ -574,6 +574,10 @@ weather-js@^2.0.0:
     request "2.x.x"
     xml2js "0.4.x"
 
+weather.js@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/weather.js/-/weather.js-0.1.0.tgz#ed78e2e5968c5b607ffa1b67ca59ffd14e5127b9"
+
 xml2js@0.4.x:
   version "0.4.17"
   resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.17.tgz#17be93eaae3f3b779359c795b419705a8817e868"

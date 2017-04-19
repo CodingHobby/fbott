@@ -8,7 +8,7 @@ const express = require('express'),
 	server = app.listen(port, function () {
 		console.log('App running on port ' + port)
 	}),
-	weather = require('weather-js')
+	Weather = require('weather.js')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -86,18 +86,9 @@ function sendTextMessage(id, messageText) {
 		city.splice(0, 1)
 		city = city.join('')
 
-		weather.find({ search: city, degreeType: 'C' }, (err, result) => {
-			if (err) text = err
-			else {
-				console.log(JSON.stringify(result, null, 2))
-				if (result) {
-					text = result.current.temperature
-				} else {
-					text = 'Something went terribly wrong'
-				}
-			}
-		});
-		text = uri
+		Weather.getCurrent(city, current => {
+			text = `Temperature: ${current.temperature()}\nConditions: ${current.conditions()}`
+		})
 	} else {
 		text = messageText
 	}
