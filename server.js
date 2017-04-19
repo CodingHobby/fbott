@@ -88,9 +88,13 @@ function sendTextMessage(id, messageText) {
 
 		weather.find({ search: city, degreeType: 'C' }, (err, result) => {
 			if (err) text = err
-
 			else {
-				let text = result.current.temperature
+				console.log(JSON.stringify(result, null, 2))
+				if (result) {
+					text = result.current.temperature
+				} else {
+					text = 'Something went terribly wrong'
+				}
 			}
 		});
 		text = uri
