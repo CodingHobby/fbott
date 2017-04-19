@@ -86,7 +86,7 @@ function sendTextMessage(id, messageText) {
 		city.splice(0, 1)
 		city = city.join('')
 
-		Weather.getCurrent(city, current => {
+		Weather.getCurrent(city, function(current) {
 			text = `Temperature: ${current.temperature()}\nConditions: ${current.conditions()}`
 		})
 	} else {
