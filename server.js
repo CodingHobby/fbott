@@ -76,10 +76,10 @@ function receivedMessage(event) {
 		// and send back the example. Otherwise, just echo the text we received.
 		switch (messageText.charAt(0)) {
 			case '!':
-				const city = messageText.split('')
+				let city = messageText.split('')
 				city.splice(0, 1)
-				city.join('')
-				sendApiData(senderID, city);
+				city = city.join('')
+				sendTextMessage(senderID, city);
 				break
 
 			default:
@@ -101,19 +101,6 @@ function sendTextMessage(recipientId, messageText) {
 	};
 
 	callSendAPI(messageData);
-}
-
-function sendApiData(recipientId, city) {
-	var messageData = {
-		recipient: {
-			id: recipientId
-		},
-		message: {
-			text: city
-		}
-	}
-
-	callSendAPI(messageData)
 }
 
 function callSendAPI(messageData) {
