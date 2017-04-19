@@ -108,7 +108,7 @@ function sendTextMessage(id, messageText) {
 			id
 		},
 		message: {
-			text: text || 'Something went wrong'
+			text: text
 		}
 	}
 
